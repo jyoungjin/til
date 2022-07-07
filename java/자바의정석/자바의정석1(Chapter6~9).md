@@ -220,3 +220,9 @@ class Child extends Parent {
 
 ----
 
+#### 제어자
+
+>클래스, 변수 또는 메서드의 선언부에 함께 사용되어 부가적인 의미를 부여한다.
+
+1. 접근 제어자: public, protected, default, private
+2. 그 외: static, final, abstract, native, transient, synchronized, volatile, strictfp
