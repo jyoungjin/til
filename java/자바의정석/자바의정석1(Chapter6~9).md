@@ -226,3 +226,5 @@ class Child extends Parent {
 
 1. 접근 제어자: public, protected, default, private
 2. 그 외: static, final, abstract, native, transient, synchronized, volatile, strictfp
+
+static이 사용될 수 있는 곳 - 멤버변수, 메서드, 초기화 블럭
