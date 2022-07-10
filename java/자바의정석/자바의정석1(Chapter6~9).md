@@ -227,4 +227,9 @@ class Child extends Parent {
 1. 접근 제어자: public, protected, default, private
 2. 그 외: static, final, abstract, native, transient, synchronized, volatile, strictfp
 
-static이 사용될 수 있는 곳 - 멤버변수, 메서드, 초기화 블럭
+final: final이 붙은 변수는 상수이므로 일반적으로 선언과 초기화를 동시에 하지만, 인스턴스 변수의 경우 생성자에서 초기화 되도록 할 수 있다.
+
+abstract 클래스: 클래스 내에 추상 메서드가 선언되어 있음을 의미
+
+abstract 메서드: 선언부만 작성하고 구현부는 작성하지 않은 추상 메서드임을 의미
+
