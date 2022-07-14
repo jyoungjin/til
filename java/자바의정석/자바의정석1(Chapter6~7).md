@@ -1,6 +1,6 @@
-# Java의 정석 1 (Chapter 6~9)
+# Java의 정석 1 (Chapter 6~7)
 
-### 2021/07/03~2021/07/06
+### 2021/07/03~2021/07/12
 
 ----
 
@@ -218,8 +218,6 @@ class Child extends Parent {
 
 - import static으로 지정하면 클래스 이름을 생략 할 수 있다.
 
-----
-
 #### 제어자
 
 >클래스, 변수 또는 메서드의 선언부에 함께 사용되어 부가적인 의미를 부여한다.
@@ -227,9 +225,91 @@ class Child extends Parent {
 1. 접근 제어자: public, protected, default, private
 2. 그 외: static, final, abstract, native, transient, synchronized, volatile, strictfp
 
+static: 클래스 변수는 인스턴스에 관계없이 같은 값을 갖으며 하나의 변수를 모든 인스턴스가 공유한다.
+
 final: final이 붙은 변수는 상수이므로 일반적으로 선언과 초기화를 동시에 하지만, 인스턴스 변수의 경우 생성자에서 초기화 되도록 할 수 있다.
 
 abstract 클래스: 클래스 내에 추상 메서드가 선언되어 있음을 의미
 
 abstract 메서드: 선언부만 작성하고 구현부는 작성하지 않은 추상 메서드임을 의미
 
+#### 접근 제어자
+
+- private: 같은 클래스 내에서만 접근이 가능하다.
+- default: 같은 패키지 내에서만 접근이 가능하다.
+- protected: 같은 패키지 내에서, 그리고 다른 패키지의 자손 클래스에서 접근이 가능하다.
+- public: 접근 제한이 전혀 없다.
+
+#### 제어자 조합 시 유의 사항
+
+1. 메서드에 static과 abstract는 함께 사용할 수 없다.
+2. 클래스에 abstract와 final을 동시에 사용할 수 없다,
+3. abstract 메서드의 접근 제어자가 private일 수 없다.
+4. 메서드에 private와 final을 같이 사용할 필요는 없다.
+
+----
+
+#### 다형성
+
+> 여러가지 형태를 가질 수 있는 능력, 조상 클래스 타입의 참조변수로 자손 클래스의 인스턴스를 참조할 수 있도록 하는 것
+
+- 형변환은 참조변수의 타입을 변환하는 것이지 인스턴스를 변환하는 것은 아니기 때문에 참조변수의 형변환은 인스턴스에 아무런 영향을 미치지 않는다. 
+  단지 참조변수의 형변환을 통해서, 참조하고 있는 인스턴스에서 사용할 수 있는 멤버의 범위(개수)를 조절하는 것뿐이다.
+
+  - 자손 타입 -> 조상 타입(Up-casting): 형변환 생략가능	
+
+  - 자손타입 <- 조상타입(Down-casting): 형변환 생략불가
+  - Instanceof: 해당 연산자의 값이 true라는 것은 검사한 타입으로 형변환이 가능하다는 것을 의미한다.
+
+```java
+class BindingTest{
+	public static void main(String[] args) {
+		Parent p = new Child();
+		Child c = new Child();
+		
+		System.out.println("p.x = " + p.x);
+		p.method();
+		System.out.println();
+		System.out.println("c.x = " + c.x);
+		c.method();
+	}
+}
+
+class Parent {
+	int x = 100;
+	 
+	void method() {
+		System.out.println("Parent Method");
+	}
+}
+
+class Child extends Parent {
+	int x = 200;
+	
+	void method() {
+		System.out.println("x=" + x);
+		System.out.println("super.x=" + super.x);
+		System.out.println("this.x=" + this.x);
+	}
+}
+
+/*
+	실행결과
+	p.x = 100
+	x = 200
+	super.x = 100
+	this.x = 200
+	
+	c.x = 200
+	x = 200
+	super.x = 100
+	this.x = 200
+*/
+```
+
+----
+
+#### 추상클래스 vs 인터페이스
+
+- 인터페이스는 구현을 강제하고 추상클래스는 구현을 일부 강제한다.
+- 추상클래스는 abstract 예약어가 달린 함수만 구현을 강제한다.
