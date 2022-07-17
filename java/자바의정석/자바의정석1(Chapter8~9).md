@@ -50,5 +50,17 @@ vod method() throws Exception1, Exception2, ... ExceptionN {
 }
 ```
 
+#### finally 블럭
+
+Case1: 예외가 발생한 경우
+
+- try - catch - finally
+
+Case2: 예외가 발생하지 않은 경우
+
+- try - finally
+
+
+
 
 
