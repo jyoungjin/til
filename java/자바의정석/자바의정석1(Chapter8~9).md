@@ -98,6 +98,35 @@ Case2: 예외가 발생하지 않은 경우
 
 2. String 클래스
 
+- 변경 불가능한(immutable) 클래스
+
+  1. 인스턴스 생성 시 생성자의 매개변수로 입력받는 문자열은 이 인스턴스 변수에 문자형 배열(char[])로 저장된다.
+
+  2. String 클래스는 앞에 final이 붙어 있으므로 다른 클래스의 조상이 될 수 없다.
+     ```java
+     public final class String implements java.io.Serializable, Comparable {
+     	private char[] value;
+     }
+     ```
+
+  3. 한번 생성된 String 인스턴스가 갖고 있는 문자열은 읽어 올 수만 있고, 변경할 수는 없다. 이처럼 String 값은 연산 시 마다 새로운 문자열을 가진 String 인스턴스가 생성되어 메모리 공간을 차지하게 되므로 가능한 한 결합횟수를 줄이는 것이 좋다.
+     문자열의 결합이나 추출 등 문자열을 다루는 작업이 많이 필요한 경우에는 String 클래스 대신 StringBuffer 클래스를 사용하는 것이 가능하다.
+     StringBuffer 인스턴스에 저장된 문자열은 변경 가능하다.
+
+- 문자열을 만드는 두 가지 방법
+
+  ```java
+  // 1. 문자열 리터럴을 지정하는 방법 - str1,str2는 같은 주소를 가리킨다.
+  String str1 = "abc";
+  String str2 = "abc";
+  
+  // 2. String 클래스의 생성자를 사용해서 만드는 방법 - str3,str4는 다른 주소를 가리킨다.
+  String str3 = new String("abc");
+  String str4 = new String("abc");
+  ```
+
+  
+
 
 
 
