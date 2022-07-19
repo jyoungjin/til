@@ -202,17 +202,119 @@ System.out.println(str); // 3 더하기 5는 8입니다.
 
 
 
+3. StringBuffer 클래스와 StringBuilder 클래스
+
+   1. StringBuffer 
+      - String 클래스는 인스턴스를 생성할 때 지정된 문자열을 변경할 수 없지만 StringBuffer 클래스는 변경이 가능하다.
+        내부적으로 문자열 편집을 위한 버퍼를 가지고 있으며, StringBuffer 인스턴스를 생성할 때 그 크기를 지정할 수 있다.
+        이 때, 편집할 문자열의 길이를 고려하여 버퍼의 길이를 충분히 잡아주는 것이 좋다. 편집 중인 문자열이 버퍼의 길이를 넘어서게 되면 버퍼의 길이를 늘려주는 작업이 추가로 수행되어야하기 때문에 작업효율이 떨어진다.
+        버퍼의 크기를 지정해주지 않으면 16개의 문자를 저장할 수 있는 크기의 버퍼를 생성한다.
+
+   | 메서드                                                       | 설명                                                         |
+   | ------------------------------------------------------------ | ------------------------------------------------------------ |
+   | StringBuffer()                                               | 16문자를 담을 수 있는 버퍼를 가진 StringBuffer 인스턴스를 생성한다. |
+   | StringBuffer(int length)                                     | 지정된 개수의 문자를 담을 수 있는 버퍼를 가진 StringBuffer 인스턴스를 생성한다. |
+   | StringBuffer(String s)                                       | 지정된 문자열 값(str)을 갖는 StringBuffer 인스턴스를 생성한다. |
+   | StringBuffer append(boolean b)<br />StringBuffer append(char c)<br />StringBuffer append(char[] str)<br />StringBuffer append(double d)<br />StringBuffer append(float f)<br />StringBuffer append(int i)<br />StringBuffer append(long l)<br />StringBuffer append(Object obj)<br />StringBuffer append(String str) | 매개변수로 입력된 값을 문자열로 변환하여 StringBuffer 인스턴스가 저장하고 있는 문자열의 뒤에 덧붙인다. |
+   | int capacity()                                               | StringBuffer 인스턴스의 버퍼크기를 알려준다. length()는 버페에 담긴 문자열의 길이를 알려준다. |
+   | char charAt(int index)                                       | 지정된 위치(index)에 있는 문자를 반환한다.                   |
+   | StringBuffer delete(int start, int end)                      | 시작위치부터 끝 위치 사이에 있는 문자를 제거한다. 단, 끝 위치의 문자는 제외. |
+   | StringBuffer deleteCharAt(int index)                         | 지정된 위치(index)의 문자를 제거한다.                        |
+   | StringBuffer insert(int pos, boolean b)<br />StringBuffer insert(int pos, char c)<br />StringBuffer insert(int pos, char[] str)<br />StringBuffer insert(int pos, double d)<br />StringBuffer insert(int pos, float f)<br />StringBuffer insert(int pos, int i)<br />StringBuffer insert(int pos, long l)<br />StringBuffer insert(int pos, Object obj)<br />StringBuffer insert(int pos, String str) | 두 번째 매개변수로 받은 값을 문자열로 변환하여 지정된 위치(pos)에 추가한다. pos는 0부터 시작. |
+   | int length()                                                 | StringBuffer 인스턴스에 저장되어 있는 문자열의 길이를 반환한다. |
+   | StringBuffer replace(int start, int end, String str)         | 지정된 범위의 문자들을 주어진 문자열로 바꾼다. end 위치의 문자는 범위에 포함되지 않음. |
+   | StringBuffer reverse()                                       | StringBuffer 인스턴스에 저장되어 있는 문자열의 순서를 거꾸로 나열한다. |
+   | void setCharAt(int index, char ch)                           | 지정된 위치의 문자를 주어진 문자(ch)로 바꾼다.               |
+   | void setLength(int newLength)                                | 지정된 길이로 문자열의 길이를 변경한다. 길이를 늘리는 경우에 나머지 빈 공간을 널문자 '\u0000'로 채운다. |
+   | String toString()                                            | StringBuffer 인스턴스의 문자열을 String으로 반환             |
+   | String substring(int start)<br />String substring(int start, int end) | 지정된 범위 내의 문자열을 String으로 뽑아서 반환한다. <br />시작위치만 지정하면 시작위치부터 문자열 끝까지 뽑아서 반환한다. |
+
+   
+
+   2. StringBuilder
+      - StringBuffer는 멀티쓰레드에 안전(thread safe)하도록 동기화되어 있다. 이 동기화는 StringBuffer의 성능을 떨어뜨리게 된다.
+        그래서 StringBuffer에서 쓰레드의 동기화만 뺀 StringBuilder가 새로 추가되었다.
+        StringBuffer도 충분히 성능이 좋기 때문에 성능향상이 반드시 필요한 경우를 제외하고는 기존에 작성한 코드에서 굳이 바꿀 필요는 없다.
+
+4. Math 클래스
+
+| 메서드                                                       | 설명                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| static double abs(double a)<br />static float abs(float f)<br />static int abs(int f)<br />static long abs(long f) | 주어진 값의 절대값을 반환한다.                               |
+| static double ceil(double a)                                 | 주어진 값을 올림하여 반환한다.                               |
+| static double floor(double a)                                | 주어진 값을 버림하여 반환한다.                               |
+| static double max(double a, double b)<br />static float max(float a, float b)<br />static int max(int a, int b)<br />static long max(long a, long b) | 주어진 두 값을 비교하여 큰 쪽을 반환한다.                    |
+| static double min(double a, double b)<br />static float min(float a, float b)<br />static int min(int a, int b)<br />static long min(long a, long b) | 주어진 두 값을 비교하여 작은 쪽을 반환한다.                  |
+| static double random()                                       | 0.0~1.0 범위의 임의의 double 값을 반환한다.<br />(1.0)은 범위에 포함되지 않는다. |
+| static double rint(double a)                                 | 주어진 double값과 가장 가까운 정수값을 double형으로 반환한다. |
+| static long round(double a)<br />static long round(float a)  | 소수점 첫째자리에서 반올림한 정수값(long)을 반환한다. <br />매개변수의 값이 음수인 경우, round()와 rint()의 결과가 다르다는 것에 주의하자. |
 
 
 
+5. 래퍼(wrapper) 클래스
+
+![Java Wrapper 클래스 - Junhyunny's Devlogs](https://junhyunny.github.io/images/java-wrapper-class-1.JPG)
+
+- 8개의 기본형 중 char, int형을 제외한 나머지는 자료형 이름의 첫 글자를 대문자로 한 것이 각 래퍼 클래스의 이름이다.
+
+| 기본형  | 래퍼 클래스 | 생성자                                                       |
+| ------- | ----------- | ------------------------------------------------------------ |
+| boolean | Boolean     | Boolean (boolean value)<br />Boolean (String s)              |
+| char    | Character   | Character (char value)                                       |
+| byte    | Byte        | Byte (byte value)<br />Byte (String s)                       |
+| short   | Short       | Short (short value)<br />Short (String s)                    |
+| int     | Integer     | Integer (int value)<br />Integer (String s)                  |
+| long    | Long        | Long (long value)<br />Long (String s)                       |
+| float   | Float       | Float (double value)<br />Float (float value)<br />Float (String s) |
+| double  | Double      | Double (double value)<br />Double (String s)                 |
 
 
 
+| 문자열 -> 기본형                                             | 문자열 -> 래퍼 클래스                                        |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| byte b = Byte.parseByte("100")<br />short s = Short.parseShort("100")<br />int i = Integer.parseInt("100")<br />long l = Long.parseLong("100")<br />float f = Float.parseFloat("3.14")<br />double d = Double.parseDouble("3.14") | Byte b = Byte.valueOf("100")<br />Short s = Short.valueOf("100")<br />Integer i = Integer.valueOf("100")<br />Long l = Long.valueOf("100")<br />Float f = Float.valueOf("3.14")<br />Double d = Double.valueOf("3.14") |
 
+- JDK1.5부터 도입된 오토박싱 기능 때문에 반환값이 기본형일 때와 래퍼클래스일 때의 차이가 없어졌다.
+  그래서 구별없이 valueOf()를 쓰는 것도 괜찮은 방법이다. 단, 성능은 valueOf()가 조금 더 느리다.
 
+- 문자열의 진법 변환
+  ```java
+  static int parseInt(String s, int radix) // 문자열 s를 radix 진법으로 인식
+  static Integer valueOf(String s, int radix)
+  ```
 
+6. 오토박싱 & 언박싱
+   - JDK 1.5 이전에는 기본형과 참조형 간의 연산이 불가능했기 때문에, 래퍼 클래스로 기본형을 객체로 만들어서 연산해야 했다.
+     하지만 이제는 기본형과 참조형 간의 덧셈이 가능하다. 
+     자바 언어의 규칙이 바뀐 것은 아니고, 컴파일러가 자동으로 변환하는 코드를 넣어주기 때문이다.
+   - 오토박싱: 기본형 -> 래퍼 클래스
+   - 언박싱: 래퍼 클래스 -> 기본형
 
+----
 
+정규식 - java.util.regex 패키지
 
+```java
+import java.util.regex.*;
 
+class RegularEx1 {
+  public static void main(String[] args){
+    String data = {"bat", "baby", "bonus", "cA", "ca", "co", "c.", "c0", "car", "combat", "count", "date", "disc"};
+    Pattern p = Pattern.compile("c[a-z]*");
+    
+    for(int i=0; i<data.length; i++){
+      Matcher m = p.matcher(data[i]);
+      if(m.matches())
+        System.out.println(data[i] + ",");
+    }
+  }
+}
+// ca,co,car,combat,count
+```
+
+1. 정규식을 매개변수로 Pattern 클래스의 static 메서드인 Pattern compile(String regex)을 호출하여 Pattern 인스턴스를 얻는다.
+2. 정규식으로 비교할 대상을 매개변수로 Pattern 클래스의 Matcher matcher(CharSequence input)를 호출해서 Matcher 인스턴스를 얻는다.
+3. Matcher 인스턴스에 boolean matches()를 호출해서 정규식에 부합하는지 확인한다.
+
+![정규표현식(정규식) - javascript](https://t1.daumcdn.net/cfile/tistory/995A24405A9BD92A3A)
 
