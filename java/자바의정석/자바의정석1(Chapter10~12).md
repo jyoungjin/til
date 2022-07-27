@@ -262,3 +262,55 @@ class Main {
 
 ----
 
+#### Iterator, ListIterator, Enumeration
+
+- 모두 컬렉션에 저장된 요소를 접근하는데 사용되는 인터페이스이다. 
+- Enumeration은 Iterator의 구버젼이다. 
+- ListIterator는 Iterator의 기능을 향상 시킨 것이다. (양방향 조회기능 추가, List를 구현한 경우만 사용가능)
+
+```java
+public interface Iterator {
+	boolean hasNext();
+	Object next();
+	void remove();
+}
+
+public interface Collection {
+	...
+	public Iterator iterator();
+	...
+}
+
+// 사용방법
+List list = new ArrayList();
+// Map의 경우 - Iterator it = map.keySet().iterator();
+Iterator it = list.iterator();
+while(it.hasNext()) {
+  System.out.println(it.next());
+}
+```
+
+
+
+- iterator
+
+| 메서드            | 설명                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| boolean hasNext() | 읽어 올 요소가 남아있는지 확인한다. 있으면 true, 없으면 false를 반환한다. |
+| Object next()     | 다음 요소를 읽어 온다. next()를 호출하기 전에 hasNext()를 호출해서 읽어 올 요소가 있는지 확인하는 것이 안전하다. |
+| void remove()     | next()로 읽어 온 요소를 삭제한다. next()를 호출한 다음에 remove()를 호출해야한다. (선택적 기능) |
+
+- listIterator
+
+| 메서드                | 설명                                                         |
+| --------------------- | ------------------------------------------------------------ |
+| void add(Object o)    | 컬렉션에 새로운 객체(o)를 추가한다. (선택적 기능)            |
+| boolean hasNext()     | 읽어 올 다음 요소가 남아있는지 확인한다.                     |
+| boolean hasPrevious() | 읽어 올 이전 요소가 남아있는지 확인한다.                     |
+| Object next()         | 다음 요소를 읽어 온다. next()를 호출하기 전에 hasNext()를 호출해서 읽어 올 요소가 있는지 확인하는 것이 안전하다. |
+| Object previous()     | 이전 요소를 읽어 온다. next()를 호출하기 전에 hasPrevious()를 호출해서 읽어 올 요소가 있는지 확인하는 것이 안전하다. |
+| int nextIndex()       | 다음 요소의 index를 반환한다.                                |
+| int previousIndex()   | 이전 요소의 index를 반환한다.                                |
+| void remove()         | next() 또는 previous()로 읽어 온 요소를 삭제한다. 반드시 next()나 previous()를 먼저 호출한 다음에 이 메서드를 호출해야 한다. (선택적 기능) |
+| void set(Object o)    | next() 또는 previous()로 읽어 온 요소를 지정된 객체(o)로 변경한다. 반드시 next()나 previous()를 먼저 호출한 다음에 이 메서드를 호출해야 한다. (선택적 기능) |
+
