@@ -21,3 +21,52 @@
    - 기존 코드 건드리지 않고 새 기능 추가
    
    > https://refactoring.guru/design-patterns/proxy
+   
+   ```java
+   // 사용 시점엔 Payment를 사용하지만 CreditCard가 조건 별로 Cash를 사용할지 Card를 사용할지 분기시켜준다.
+   // 기존 코드 건드리지 않고 프록시 패턴으로 새 기능 추가하기
+   public class CreditCard implements Payment{
+   
+   	Payment cash = new Cash();
+   
+   	@Override
+   	public void pay(int amount) {
+   		if (amount > 100) {
+   			System.out.printf(amount + " 신용 카드");
+   		} else {
+   			cash.pay(amount);
+   		}
+   	}
+   }	
+   ```
+
+----
+
+##### AOP 적용 예제
+
+```java
+// @LogExecutionTime 으로 메소드 처리 시간 로깅하기
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface LogExcutionTime {
+}
+```
+
+
+
+```java
+// 실제 Aspect (@LogExecutionTime 애노테이션 달린곳에 적용)
+@Component
+@Aspect
+public class LogAspect {
+    Logger logger = LoggerFactory.getLogger(LogAspect.class);
+    @Around("@annotation(LogExecutionTime)")
+    public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+          StopWatch stopWatch = new StopWatch(); 
+          stopWatch.start();
+          Object proceed = joinPoint.proceed(); stopWatch.stop();
+          logger.info(stopWatch.prettyPrint()); return proceed;
+    } 
+}
+```
+
