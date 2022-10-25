@@ -73,3 +73,16 @@ implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
 | **@Operation(summary = "foo", description = "bar")**         | 특정 경로에 대한 작업 또는 일반적으로 HTTP 메서드를 설명 |
 | **@Parameter**                                               | 작업 매개 변수에 대한 추가 메타 데이터를 추가            |
 
+
+
+##### Swagger 설정
+
+```yaml
+springdoc:
+  swagger-ui:
+    # 메서드 순 정렬
+    operations-sorter: method
+    # Operationa 목록 펼치기 (default = true)
+    doc-expansion: false
+```
+
